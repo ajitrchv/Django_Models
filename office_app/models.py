@@ -1,12 +1,14 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 class patient(models.Model):
     fname = models.CharField(max_length=30)
     lname = models.CharField(max_length=30)
-    age = models.IntegerField()
+    age = models.IntegerField(validators=[MinValueValidator(0),MaxValueValidator(120)])
+    heartrate = models.IntegerField(default=72)
     
     def __str__(self):
-        return f"{self.fname} {self.lname} of age {self.age}"
+        return f"{self.fname} {self.lname} of age {self.age} has a heartrate of {self.heartrate}bpm"
     
 # patient.objects.create(fname='peru',lname='inshal',age=30) //for all in one go
 
